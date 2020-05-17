@@ -1,0 +1,24 @@
+{
+    "builders": [{
+        "type": "amazon-ebs",
+        "region": "{{user `region`}}",
+        "source_ami": "ami-02eac2c0129f6376b",
+        "instance_type": "t2.micro",
+        "ssh_username": "centos",
+        "ssh_key_name”: “farrukhs_bastion”,
+        "ami_name": "packer-breakpoint {{timestamp}}"
+        }
+      ],
+    "provisioners": [
+        {
+            "type": "shell",
+               "inline":[
+                   "sudo yum install httpd -y"
+                ]
+            },
+      {
+        "type": "breakpoint",
+        "note": "Wait for you to delete"
+      }
+   ]
+}
